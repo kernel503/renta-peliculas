@@ -14,6 +14,15 @@ class MovieStore extends JsonResource
      */
     public function toArray($request)
     {
+        return [
+            'id' => $this->id,
+            'movie_name' => $this->movie_name,
+            'release_date' => $this->release_date,
+            'img_url' => $this->img_url,
+            'quantity_stock' => $this->quantity_stock,
+            'sale_price' => $this->sale_price,
+            'rent_price' => $this->rent_price
+        ];
         return parent::toArray($request);
     }
 }

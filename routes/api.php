@@ -25,3 +25,6 @@ Route::put('/categoria', 'Api\CategoryController@update');
 
 Route::get('/pelicula', 'Api\MovieController@index');
 Route::post('/pelicula', 'Api\MovieController@create');
+Route::get('/pelicula/catalogo', 'Api\MovieController@catalogue');
+Route::get('/pelicula/catalogo/{id}', 'Api\MovieController@record');
+Route::post('/pelicula/compra', 'Api\MovieController@purchase');

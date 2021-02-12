@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MovieStore;
 use App\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MovieController extends Controller
 {
@@ -43,7 +45,41 @@ class MovieController extends Controller
             ['id' => $id],
             $collection->toArray()
         );
+    }
 
-        // Movie::create($request->all());
+    public function catalogue()
+    {
+        return MovieStore::collection(Movie::where('available', true)->get());
+    }
+
+    public function record()
+    {
+        return MovieStore::collection(Movie::where('available', true)->get());
+    }
+
+    public function purchase(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'option' => 'required',
+            'user_id' => 'required',
+            'movie_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(["mensaje" => "Campos invalidos"], 400);
+        }
+        $collection = collect($request);
+        $option = $collection->get('option');
+        $optionsAvailable = array(0, 1);
+
+        if (!in_array($option,  $optionsAvailable)) {
+            return response()->json(["mensaje" => "Opción Invalida"], 400);
+        }
+
+        //1 Compra, 0 Rentado
+        if ($option) {
+        }
+
+        return response()->json(["mensaje" => "Transacción realizada"]);
     }
 }

@@ -18,4 +18,9 @@ class MovieController extends Controller
     {
         return view('administrator/movie', ['id' => Auth::user()->id]);
     }
+
+    public function moviestore()
+    {
+        return view('client/moviestore', ['id' => Auth::user()->id]);
+    }
 }
