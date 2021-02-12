@@ -13,6 +13,7 @@
 export default {
   mounted() {
     console.log("Component mounted.");
+    // window.location.href = "/master";
     // axios
     //   .get("/user?ID=12345")
     //   .then(function (response) {

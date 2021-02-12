@@ -13,6 +13,17 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
+                    @guest
+                    Invitado
+                    @else
+                    @if(Auth::user()->is_admin)
+                        Es un administrador!!!
+                    @else
+                        Visitante    
+                    @endif
+                    Registrado
+                    @endguest
                     {{ __('You are logged in!') }}
                 </div>
             </div>
