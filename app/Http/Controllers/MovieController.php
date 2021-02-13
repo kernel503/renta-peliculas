@@ -8,19 +8,20 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    // Route::get('/categoria', function () {
-    //     if (Auth::user()->is_admin) {
-    //         return response()->json(['admin' => 'categoria']);
-    //     }
-    //     return redirect('/home');
-    // });
     public function index()
     {
-        return view('administrator/movie', ['id' => Auth::user()->id]);
+        if (Auth::check() && Auth::user()->is_admin) {
+            return view('administrator/movie', ['id' => Auth::user()->id]);
+        }
+        return redirect('/tienda');
+        // return view('administrator/movie', ['id' => Auth::user()->id]);
     }
 
     public function moviestore()
     {
-        return view('client/moviestore', ['id' => Auth::user()->id]);
+        if (Auth::check()) {
+            return view('client/moviestore', ['id' => Auth::user()->id]);
+        }
+        return redirect('/home');
     }
 }

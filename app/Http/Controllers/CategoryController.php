@@ -12,6 +12,9 @@ class CategoryController extends Controller
 
     public function index()
     {
-        return view('administrator/category');
+        if (Auth::check() && Auth::user()->is_admin) {
+            return view('administrator/category');
+        }
+        return redirect('/tienda');
     }
 }
