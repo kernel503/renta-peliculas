@@ -17,8 +17,20 @@
                     @guest
                         Invitado
                     @else
-                        @if(Auth::user()->is_admin)
-                            Es un administrador!!!
+                        @if(Auth::user()->is_admin)    
+                        <div class="container">
+                            <div class="row">
+                              <div class="col-sm">
+                                <button type="button" class="btn btn-outline-info">Descargar informe usuarios</button>
+                              </div>
+                              <div class="col-sm">
+                                <button type="button" class="btn btn-outline-success">Descargar informe películas</button>
+                              </div>
+                              <div class="col-sm">
+                                <button type="button" class="btn btn-outline-dark">Descargar informe movimientos</button>
+                              </div>
+                            </div>
+                          </div>                                    
                         @else
                             Bienvenido!!   
                         @endif               

@@ -22,6 +22,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/tienda', 'MovieController@moviestore')->name('usuario-tienda');
 Route::get('/historial', 'MovieController@moviepurchase')->name('usuario-historial');
+Route::get('/exportar/categorias', 'CategoryController@categoryexport')->name('category-exports');
+Route::get('/exportar/usuarios', 'CategoryController@userexport')->name('user-exports');
+Route::get('/exportar/movimientos', 'CategoryController@movementexport')->name('exports');
 
 Route::prefix('admin')->group(function () {
     Route::get('/categoria', 'CategoryController@index')->name('admin-categoria');
