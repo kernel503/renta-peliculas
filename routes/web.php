@@ -29,4 +29,5 @@ Route::get('/exportar/movimientos', 'CategoryController@movementexport')->name('
 Route::prefix('admin')->group(function () {
     Route::get('/categoria', 'CategoryController@index')->name('admin-categoria');
     Route::get('/pelicula', 'MovieController@index')->name('admin-pelicula');
+    Route::get('/permisos', 'PermissionController@changeRol')->name('admin-permisos');
 });

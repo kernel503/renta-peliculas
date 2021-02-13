@@ -51,13 +51,6 @@ class MovieController extends Controller
 
     public function catalogue()
     {
-        // $collection = collect([]);
-        // $merged = collect([]);
-        // $movies = Movie::all();
-        // foreach ($movies as $movie) {
-        //     $merged = collect($movie)->merge(collect($movie->category));
-        //     $collection->push($merged);
-        // }
         return MovieStore::collection(Movie::where('available', true)->where('quantity_stock', '>', 0)->get());
     }
 

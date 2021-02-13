@@ -28,3 +28,6 @@ Route::post('/pelicula', 'Api\MovieController@create');
 Route::get('/pelicula/catalogo', 'Api\MovieController@catalogue');
 Route::get('/pelicula/catalogo/{id}', 'Api\MovieController@record');
 Route::post('/pelicula/compra', 'Api\MovieController@purchase');
+
+Route::get('/usuarios', 'Api\PermissionController@index');
+Route::put('/usuarios', 'Api\PermissionController@edit');
