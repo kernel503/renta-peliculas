@@ -2,7 +2,7 @@ Solución parcial para una empresa que renta películas [Sitio desarrollado](htt
 
 ### Funcionalidades 
 - [x] CRUD Película
-- [x] CRUD Caetgoría
+- [x] CRUD Categoría
 - [x] Exportar Resultados
 - [x] Alquilar o Comprar
 - [x] Seguridad, Rol
