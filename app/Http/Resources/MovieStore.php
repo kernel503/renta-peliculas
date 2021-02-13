@@ -21,7 +21,8 @@ class MovieStore extends JsonResource
             'img_url' => $this->img_url,
             'quantity_stock' => $this->quantity_stock,
             'sale_price' => $this->sale_price,
-            'rent_price' => $this->rent_price
+            'rent_price' => $this->rent_price,
+            'category_name' => $this->category_name
         ];
         return parent::toArray($request);
     }

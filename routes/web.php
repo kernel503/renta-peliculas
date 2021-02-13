@@ -20,9 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/tienda', 'MovieController@moviestore')->name('tienda');
+Route::get('/tienda', 'MovieController@moviestore')->name('usuario-tienda');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/categoria', 'CategoryController@index');
-    Route::get('/pelicula', 'MovieController@index');
+    Route::get('/categoria', 'CategoryController@index')->name('admin-categoria');
+    Route::get('/pelicula', 'MovieController@index')->name('admin-pelicula');
 });

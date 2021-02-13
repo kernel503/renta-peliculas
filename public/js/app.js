@@ -2637,6 +2637,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["user_id"],
   name: "MovieStore",
@@ -2647,6 +2672,7 @@ __webpack_require__.r(__webpack_exports__);
         message: "",
         color: "indigo"
       },
+      loading: false,
       cards: []
     };
   },
@@ -2674,6 +2700,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var id = _ref.id;
+      this.loading = true;
       var user_id = this.user_id;
       axios.post("/api/pelicula/compra", {
         user_id: user_id,
@@ -2683,9 +2710,13 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         _this2.snackbar = {
           active: true,
-          message: response.data.message,
+          message: response.data.mensaje,
           color: "indigo"
         };
+
+        _this2.fetchMovieCatalogue();
+
+        _this2.loading = false;
       })["catch"](function (error) {
         console.log(error);
         _this2.snackbar = {
@@ -2693,6 +2724,7 @@ __webpack_require__.r(__webpack_exports__);
           message: "Error",
           color: "red"
         };
+        _this2.loading = false;
       });
     }
   }
@@ -39172,105 +39204,164 @@ var render = function() {
           _c(
             "v-row",
             { attrs: { dense: "" } },
-            _vm._l(_vm.cards, function(card) {
-              return _c(
-                "v-col",
-                { key: card.id, attrs: { cols: "3" } },
-                [
-                  _c(
-                    "v-card",
-                    [
-                      _c(
-                        "v-img",
-                        {
-                          staticClass: "white--text align-end",
-                          attrs: {
-                            src: card.img_url,
-                            gradient:
-                              "to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)",
-                            height: "250"
-                          }
-                        },
-                        [
-                          _c("v-card-title", {
-                            domProps: { textContent: _vm._s(card.movie_name) }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-card-text", [
-                        _c("div", { staticClass: "h6" }, [
-                          _vm._v("Comprar por $" + _vm._s(card.sale_price))
+            [
+              this.cards.length === 0
+                ? _c("div", { staticClass: "red--text h1" }, [
+                    _vm._v(
+                      "\n        No contamos con películas disponibles.\n      "
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.cards, function(card) {
+                return _c(
+                  "v-col",
+                  { key: card.id, attrs: { cols: "3" } },
+                  [
+                    _c(
+                      "v-card",
+                      [
+                        _c(
+                          "v-img",
+                          {
+                            staticClass: "white--text align-end",
+                            attrs: {
+                              src: card.img_url,
+                              gradient:
+                                "to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)",
+                              height: "250"
+                            }
+                          },
+                          [
+                            _c("v-card-title", {
+                              domProps: { textContent: _vm._s(card.movie_name) }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-card-text", [
+                          _c("div", { staticClass: "h6" }, [
+                            _vm._v("Comprar por $" + _vm._s(card.sale_price))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "h6" }, [
+                            _vm._v("Alquilar por $" + _vm._s(card.rent_price))
+                          ]),
+                          _vm._v(" "),
+                          card.quantity_stock > 10
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n              Cantidad disponible: " +
+                                    _vm._s(card.quantity_stock) +
+                                    "\n            "
+                                )
+                              ])
+                            : _c("div", { staticClass: "red--text" }, [
+                                _vm._v(
+                                  "\n              Cantidad disponible: " +
+                                    _vm._s(card.quantity_stock) +
+                                    "\n            "
+                                )
+                              ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "h6" }, [
-                          _vm._v("Alquilar por $" + _vm._s(card.rent_price))
-                        ]),
-                        _vm._v(" "),
-                        card.quantity_stock > 10
-                          ? _c("div", [
-                              _vm._v(
-                                "\n              Cantidad disponible: " +
-                                  _vm._s(card.quantity_stock) +
-                                  "\n            "
-                              )
-                            ])
-                          : _c("div", { staticClass: "red--text" }, [
-                              _vm._v(
-                                "\n              Cantidad disponible: " +
-                                  _vm._s(card.quantity_stock) +
-                                  "\n            "
-                              )
-                            ])
-                      ]),
-                      _vm._v(" "),
+                        _c(
+                          "v-card-actions",
+                          [
+                            _c("v-spacer"),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  color: "cyan darken-3",
+                                  text: "",
+                                  disabled: _vm.loading
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.compra(card, 0)
+                                  }
+                                }
+                              },
+                              [_vm._v("\n              Alquilar\n            ")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  color: "indigo darken-4",
+                                  text: "",
+                                  disabled: _vm.loading
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.compra(card, 1)
+                                  }
+                                }
+                              },
+                              [_vm._v("\n              Comprar\n            ")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              attrs: { color: _vm.snackbar.color, timeout: "3500", left: "" },
+              scopedSlots: _vm._u([
+                {
+                  key: "action",
+                  fn: function(ref) {
+                    var attrs = ref.attrs
+                    return [
                       _c(
-                        "v-card-actions",
-                        [
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "cyan darken-3", text: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.compra(card, 0)
-                                }
+                        "v-btn",
+                        _vm._b(
+                          {
+                            attrs: { text: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.snackbar.active = false
                               }
-                            },
-                            [_vm._v("\n              Alquilar\n            ")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "indigo darken-4", text: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.compra(card, 1)
-                                }
-                              }
-                            },
-                            [_vm._v("\n              Comprar\n            ")]
-                          )
-                        ],
-                        1
+                            }
+                          },
+                          "v-btn",
+                          attrs,
+                          false
+                        ),
+                        [_vm._v("\n          Cerrar\n        ")]
                       )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            }),
-            1
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.snackbar.active,
+                callback: function($$v) {
+                  _vm.$set(_vm.snackbar, "active", $$v)
+                },
+                expression: "snackbar.active"
+              }
+            },
+            [_vm._v("\n      " + _vm._s(_vm.snackbar.message) + "\n      ")]
           )
         ],
         1
-      ),
-      _vm._v("\n  " + _vm._s(_vm.user_id) + "\n")
+      )
     ],
     1
   )

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MovieStore;
 use App\Movie;
+use App\Rental;
+use App\Shopping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,7 +51,14 @@ class MovieController extends Controller
 
     public function catalogue()
     {
-        return MovieStore::collection(Movie::where('available', true)->get());
+        // $collection = collect([]);
+        // $merged = collect([]);
+        // $movies = Movie::all();
+        // foreach ($movies as $movie) {
+        //     $merged = collect($movie)->merge(collect($movie->category));
+        //     $collection->push($merged);
+        // }
+        return MovieStore::collection(Movie::where('available', true)->where('quantity_stock', '>', 0)->get());
     }
 
     public function record()
@@ -78,7 +87,20 @@ class MovieController extends Controller
 
         //1 Compra, 0 Rentado
         if ($option) {
+            Shopping::create($collection->toArray());
+        } else {
+            $merged = $collection->merge(['initial_date' => date('Y-m-d H:i:s')]);
+            Rental::create($merged->toArray());
         }
+
+        $movie_id = $collection->get('movie_id');
+        $movie = Movie::find($movie_id);
+        if ($movie->quantity_stock <= 0) {
+            $movie->available = false;
+        } else {
+            $movie->quantity_stock = $movie->quantity_stock - 1;
+        }
+        $movie->save();
 
         return response()->json(["mensaje" => "Transacción realizada"]);
     }

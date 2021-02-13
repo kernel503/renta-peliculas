@@ -18,4 +18,9 @@ class Movie extends Model
     ];
     protected $table = 'movies';
     protected $primaryKey = 'id';
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id');
+    }
 }

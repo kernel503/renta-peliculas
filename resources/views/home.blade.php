@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Visita el sitio') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,16 +15,15 @@
                     @endif
 
                     @guest
-                    Invitado
+                        Invitado
                     @else
-                    @if(Auth::user()->is_admin)
-                        Es un administrador!!!
-                    @else
-                        Visitante    
-                    @endif
-                    Registrado
+                        @if(Auth::user()->is_admin)
+                            Es un administrador!!!
+                        @else
+                            Bienvenido!!   
+                        @endif               
                     @endguest
-                    {{ __('You are logged in!') }}
+          
                 </div>
             </div>
         </div>

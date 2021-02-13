@@ -20,7 +20,7 @@ class CreateRentalTable extends Migration
             $table->unsignedBigInteger('movie_id');
             $table->foreign('movie_id')->references('id')->on('movies');
             $table->date('initial_date');
-            $table->date('returned_date');
+            $table->date('returned_date')->nullable();
             $table->timestamps();
         });
     }
