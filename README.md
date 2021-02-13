@@ -1,5 +1,5 @@
 ### Funcionalidades 
-* [ * ] CRUD Película
+* [] CRUD Película
 * [ * ] CRUD Categoría
 * [ * ] Exportar Resultados
 * [ * ] Rol de administrador
