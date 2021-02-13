@@ -70,6 +70,9 @@
                                     <a class="dropdown-item" href="{{ route('usuario-tienda') }}">
                                         {{ __('Visitar Tienda') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('usuario-historial') }}">
+                                        {{ __('Ver historial') }}
+                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

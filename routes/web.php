@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/tienda', 'MovieController@moviestore')->name('usuario-tienda');
+Route::get('/historial', 'MovieController@moviepurchase')->name('usuario-historial');
 
 Route::prefix('admin')->group(function () {
     Route::get('/categoria', 'CategoryController@index')->name('admin-categoria');
