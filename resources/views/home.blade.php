@@ -21,10 +21,10 @@
                         <div class="container">
                             <div class="row">
                               <div class="col-sm">
-                                <a type="button" href="{{ route('category-exports') }}" class="btn btn-outline-info">Descargar informe usuarios</a>
+                                <a type="button" href="{{ route('category-exports') }}" class="btn btn-outline-info">Descargar informe películas</a>
                               </div>
                               <div class="col-sm">
-                                <a type="button" href="{{ route('user-exports') }}" class="btn btn-outline-success">Descargar informe películas</a>
+                                <a type="button" href="{{ route('user-exports') }}" class="btn btn-outline-success">Descargar informe usuarios</a>
                               </div>
                               <div class="col-sm">
                                 <a type="button" href="{{ route('movement-exports') }}" class="btn btn-outline-dark">Descargar informe movimientos</a>
